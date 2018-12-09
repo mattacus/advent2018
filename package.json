@@ -1,0 +1,12 @@
+{
+  "name": "advent",
+  "version": "1.0.0",
+  "description": "",
+  "main": "template.js",
+  "scripts": {
+    "start": "nodemon --inspect-brk"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
