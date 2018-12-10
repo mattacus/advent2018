@@ -9,14 +9,6 @@ let Grid = {
     })
   },
 
-  applyCoordinates(coordinates) {
-    coordinates.forEach(coordinate => {
-      let [x, y] = coordinate.coords;
-      let { label } = coordinate;
-      this.grid[y][x] = label;
-    })
-  },
-
   calculatePointDistanceToCoords(coordinates){
     this.grid = this.grid.map((row, yIdx) => {
       return row.map((point, xIdx) => {
@@ -131,7 +123,6 @@ fsPromises.open('6/coordinates.txt', 'r')
     let gridSize = Math.max(maxX, maxY) + 1;
 
     Grid.initialize(gridSize);
-    Grid.applyCoordinates(inputCoordinates);
     Grid.calculatePointDistanceToCoords(inputCoordinates);
     // Grid.print();
     let largestArea = Grid.calculateLargestArea();
