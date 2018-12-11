@@ -1,7 +1,7 @@
 const fs = require('fs')
 const fsPromises = fs.promises
 
-fsPromises.open('input.txt', 'r')
+fsPromises.open('8/input.txt', 'r')
   .then(fh => {
     return fh.readFile({ encoding: 'utf-8', flag: 'r' });
   })
@@ -20,20 +20,15 @@ fsPromises.open('input.txt', 'r')
         let childNodes = tree.shift();
         let metaLength = tree.shift();
   
-        // base
-        if(childNodes === 0) {
-          tree.splice(0, metaLength).forEach(el => metaSum += el);
-          return;
-        } else {
-          // recurse
+        // recurse
+        if(childNodes !== 0) {
           for(let i = 0; i < childNodes; i++) {
             treeRecurse(tree);
           }
-
-          // base
-          tree.splice(0, metaLength).forEach(el => metaSum += el);
-          return;
-        }
+        } 
+        // base
+        tree.splice(0, metaLength).forEach(el => metaSum += el);
+        return;
       }
     }
 
