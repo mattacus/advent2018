@@ -3286,7 +3286,6 @@ let ctx = canvas.getContext('2d');
 var raf;
 let fps = 60;
 let vMax = 10;
-shouldDraw = true;
 
 let frame = 0;
 
@@ -3328,34 +3327,29 @@ for(let time = 0; time < 10100; time++) {
 }
 
 function draw() {
-  setTimeout(function () {
-    if(shouldDraw) {
-      window.requestAnimationFrame(draw);
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-  
-      // debug
-      ctx.font = "12px Arial";
-      ctx.fillStyle = 'red';
-      ctx.fillText(`frame: ${frame}`, 10, 20);
-  
-      // render stars
-      stars.forEach(star => {
-        star.draw();
-        star.x += star.vx;
-        star.y += star.vy;
-      })
-  
-      frame++;
-    }
-  }, 1000 / fps)
+  raf = requestAnimationFrame(draw);
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // debug
+  ctx.font = "12px Arial";
+  ctx.fillStyle = 'red';
+  ctx.fillText(`frame: ${frame}`, 10, 20);
+
+  // render stars
+  stars.forEach(star => {
+    star.draw();
+    star.x += star.vx;
+    star.y += star.vy;
+  })
+
+  frame++;
 }
 
 canvas.addEventListener('mouseover', function (e) {
-  shouldDraw = false;
+  cancelAnimationFrame(raf);
 });
 
 canvas.addEventListener('mouseout', function (e) {
-  shouldDraw = true;
-  draw();
+  raf = requestAnimationFrame(draw);
 });
