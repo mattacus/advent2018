@@ -3284,7 +3284,7 @@ let starData = [
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
 var raf;
-let fps = 1000;
+let fps = 60;
 let vMax = 10;
 shouldDraw = true;
 
@@ -3319,12 +3319,19 @@ starData.forEach(data => {
   stars.push(star);
 })
 
+// fast-forward star positions (to the interesting part):
+for(let time = 0; time < 10100; time++) {
+  stars.forEach(star => {
+    star.x += star.vx;
+    star.y += star.vy;
+  })
+}
 
 function draw() {
   setTimeout(function () {
     if(shouldDraw) {
       window.requestAnimationFrame(draw);
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.9)';
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
   
       // debug
