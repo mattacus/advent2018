@@ -6,6 +6,10 @@ fsPromises.open('<filename>.txt', 'r')
     return fh.readFile({ encoding: 'utf-8', flag: 'r' });
   })
   .then(data => {
-    console.log(data.split('\n'))
+    main(data.split('\n'))
   })
   .catch(err => console.log(err))
+
+function main(input) {
+
+}
