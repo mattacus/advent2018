@@ -23,24 +23,24 @@ class Star {
     ctx.fillStyle = this.color;
     ctx.fill();
   }
-};
+}
 
 let stars = [];
 
-starData.forEach(data => {
-  let {position, velocity} = data;
+starData.forEach((data) => {
+  let { position, velocity } = data;
   let [x, y] = position;
   let [xV, yV] = velocity;
-  let star = new Star(x + (canvas.width / 2), y + (canvas.height / 2), xV, yV);
+  let star = new Star(x + canvas.width / 2, y + canvas.height / 2, xV, yV);
   stars.push(star);
-})
+});
 
 // fast-forward star positions (to the interesting part):
-for(let time = 0; time < 10100; time++) {
-  stars.forEach(star => {
+for (let time = 0; time < 10100; time++) {
+  stars.forEach((star) => {
     star.x += star.vx;
     star.y += star.vy;
-  })
+  });
 }
 
 function draw() {
@@ -49,24 +49,24 @@ function draw() {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   // debug
-  ctx.font = "12px Arial";
+  ctx.font = '12px Arial';
   ctx.fillStyle = 'red';
   ctx.fillText(`frame: ${frame}`, 10, 20);
 
   // render stars
-  stars.forEach(star => {
+  stars.forEach((star) => {
     star.draw();
     star.x += star.vx;
     star.y += star.vy;
-  })
+  });
 
   frame++;
 }
 
-canvas.addEventListener('mouseover', function (e) {
+canvas.addEventListener('mouseover', function(e) {
   cancelAnimationFrame(raf);
 });
 
-canvas.addEventListener('mouseout', function (e) {
+canvas.addEventListener('mouseout', function(e) {
   raf = requestAnimationFrame(draw);
 });

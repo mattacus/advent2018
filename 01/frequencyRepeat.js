@@ -1,30 +1,31 @@
-const fs = require('fs')
-const fsPromises = fs.promises
+const fs = require('fs');
+const fsPromises = fs.promises;
 
-fsPromises.open('frequencies.txt', 'r')
-  .then(fh => {
+fsPromises
+  .open('frequencies.txt', 'r')
+  .then((fh) => {
     return fh.readFile({ encoding: 'utf-8', flag: 'r' });
   })
-  .then(frequencies => {
-    let nums = frequencies.split('\n').map(el => Number(el));
+  .then((frequencies) => {
+    let nums = frequencies.split('\n').map((el) => Number(el));
     let sums = {};
     let duplicate = false;
     let i = 0;
     let sum = 0;
-    while(!duplicate) {
+    while (!duplicate) {
       sum += nums[i];
-      console.log(sum, nums[i], i)
+      console.log(sum, nums[i], i);
       // console.log(sum)
-      if(isNaN(sum)) {
+      if (isNaN(sum)) {
         break;
       }
-      if (sums[sum]){
+      if (sums[sum]) {
         duplicate = true;
         console.log('Found! ', sum);
       } else {
         sums[sum] = sum;
       }
-      i = (i < nums.length - 1) ? (i + 1) : 0;
+      i = i < nums.length - 1 ? i + 1 : 0;
     }
   })
-  .catch(err => console.log(err))
+  .catch((err) => console.log(err));

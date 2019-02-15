@@ -1,23 +1,24 @@
-const fs = require('fs')
-const fsPromises = fs.promises
+const fs = require('fs');
+const fsPromises = fs.promises;
 
-fsPromises.open('2/ids.txt', 'r')
-  .then(fh => {
+fsPromises
+  .open('2/ids.txt', 'r')
+  .then((fh) => {
     return fh.readFile({ encoding: 'utf-8', flag: 'r' });
   })
-  .then(data => {
-    console.log(checksum(data.split('\n')))
+  .then((data) => {
+    console.log(checksum(data.split('\n')));
   })
-  .catch(err => console.log(err))
+  .catch((err) => console.log(err));
 
 let checksum = (input) => {
   let twoCount = 0;
   let threeCount = 0;
-  input.forEach(id => {
+  input.forEach((id) => {
     let foo = id.split('').reduce((acc, cur) => {
-      acc[cur] = acc[cur] ? (acc[cur] + 1) : 1;
+      acc[cur] = acc[cur] ? acc[cur] + 1 : 1;
       return acc;
-    }, {})
+    }, {});
 
     let hasTwo = false;
     let hasThree = false;
@@ -29,7 +30,7 @@ let checksum = (input) => {
         threeCount++;
         hasThree = true;
       }
-    })
-  })
-  return (twoCount * threeCount);
-}
+    });
+  });
+  return twoCount * threeCount;
+};

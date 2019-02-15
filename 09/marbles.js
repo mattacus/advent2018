@@ -1,6 +1,6 @@
 // const [np, nt] = process.argv.slice(2,4);
 const [np, nt] = [10, 1618];
-const {CLinkedList} = require('./linkedlist');
+const { CLinkedList } = require('./linkedlist');
 
 let Game = {
   numPlayers: np,
@@ -9,18 +9,17 @@ let Game = {
 
   runSimulation() {
     let currentMarble = null;
-    for(let i = 0; i <= this.lastMarble; i++) {
+    for (let i = 0; i <= this.lastMarble; i++) {
       // first marble - just insert
-      if (i === 0){
+      if (i === 0) {
         this.marbles.addToHead(i);
         currentMarble = this.marbles.head;
       } else {
         // Todo
-
       }
     }
   }
-}
+};
 
 Game.runSimulation();
 

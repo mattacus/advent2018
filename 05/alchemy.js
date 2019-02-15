@@ -10,20 +10,24 @@ const fsPromises = fs.promises;
 
     let continueReaction = true;
     let i = 0;
-    while(continueReaction) {
+    while (continueReaction) {
       // console.log(`Iteration [${i}]: ${data.join('')}`)
       continueReaction = data.reduce((pairFound, letter, idx) => {
-        if(idx < data.length - 1) {
+        if (idx < data.length - 1) {
           let nextLetter = data[idx + 1];
-          if( letter.toLowerCase() === nextLetter.toLowerCase()
-          && (letter === letter.toLowerCase() && nextLetter === nextLetter.toUpperCase()
-          || letter === letter.toUpperCase() && nextLetter === nextLetter.toLowerCase())) {
+          if (
+            letter.toLowerCase() === nextLetter.toLowerCase() &&
+            ((letter === letter.toLowerCase() &&
+              nextLetter === nextLetter.toUpperCase()) ||
+              (letter === letter.toUpperCase() &&
+                nextLetter === nextLetter.toLowerCase()))
+          ) {
             data.splice(idx, 2);
             pairFound = true;
           }
         }
         return pairFound;
-      }, false)
+      }, false);
       i++;
     }
     // console.log(`Reaction result: ${data.join('')}`)
@@ -31,4 +35,4 @@ const fsPromises = fs.promises;
   } catch (e) {
     console.error(e);
   }
-})()
+})();
